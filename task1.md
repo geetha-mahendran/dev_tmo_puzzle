@@ -32,6 +32,7 @@ Example: chart configs would be
 8.	Date range dropdown doesn’t have default value. I have defaulted to one month data 
 9.	API Calls was directly called in effect should have used stock API app for calling api, so that API can be reused in other modules as well.
 10. ChangeDetection could have set to onPush rather than default changedetectionstrategy 
+11. page content could have been either moved to constant
 
 ##Are there any code smells or problematic implementations?
 Below critial issues are observed and fixed:
