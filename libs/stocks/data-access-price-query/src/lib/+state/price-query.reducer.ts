@@ -1,6 +1,6 @@
 import { PriceQueryAction, PriceQueryActionTypes } from './price-query.actions';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { PriceQuery } from './price-query.type';
+import { PriceQuery } from '@coding-challenge/api-model';
 import { transformPriceQueryResponse } from './price-query-transformer.util';
 
 export const PRICEQUERY_FEATURE_KEY = 'priceQuery';

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { PriceQueryResponse } from './price-query.type';
+import { PriceQueryResponse } from '@coding-challenge/api-model';
 
 export enum PriceQueryActionTypes {
   SelectSymbol = 'priceQuery.selectSymbol',

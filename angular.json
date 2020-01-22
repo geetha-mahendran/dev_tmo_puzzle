@@ -321,6 +321,32 @@
           }
         }
       }
+    },
+    "api-model": {
+      "root": "libs/api-model",
+      "sourceRoot": "libs/api-model/src",
+      "projectType": "library",
+      "prefix": "coding-challenge",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/api-model/tsconfig.lib.json",
+              "libs/api-model/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/api-model/jest.config.js",
+            "tsConfig": "libs/api-model/tsconfig.spec.json"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {
