@@ -1,9 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../../dist/out-tsc/libs/stocks/data-access-environment",
+    "outDir": "../../../dist/out-tsc/libs/stocks/data-access-app-config",
     "module": "commonjs",
     "types": ["jest", "node"]
   },
+  "files": ["src/test-setup.ts"],
   "include": ["**/*.spec.ts", "**/*.d.ts"]
 }

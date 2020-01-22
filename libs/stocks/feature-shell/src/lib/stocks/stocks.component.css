@@ -1,3 +1,12 @@
 mat-form-field {
   display: block;
 }
+
+.tmo-sock-form {
+  margin-bottom: 20px;
+}
+
+.hint-label{
+  margin-bottom: 20px;
+  color:gray;
+}
