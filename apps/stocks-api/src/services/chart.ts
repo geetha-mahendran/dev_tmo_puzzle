@@ -4,7 +4,7 @@ import { APP_CONSTANT } from '../app/app.constant';
 import { ChartRequest, PriceQueryResponse } from '@coding-challenge/api-model';
 export const chartPlugin = {
   name: APP_CONSTANT.STOCKS_PLUGIN_NAME,
-  register: async (server, options) => {
+  register: async (server) => {
     const getChartData = async (request: ChartRequest) => {
       let priceQueryRes: any = {};
       try {
@@ -33,7 +33,7 @@ export const chartPlugin = {
     server.route({
       method: APP_CONSTANT.API_METHOD_POST,
       path: APP_CONSTANT.STOCK_PLUGIN_PATH,
-      handler: async (apiRequest, h) => {
+      handler: async (apiRequest) => {
         const { symbol, period }: any = apiRequest.payload;
         const id = `${symbol}:${period}`;
         return await chartCache.get({ id, symbol, period });

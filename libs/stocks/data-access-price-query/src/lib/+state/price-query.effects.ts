@@ -16,6 +16,8 @@ import {
 import { PriceQueryPartialState } from './price-query.reducer';
 import { PriceQueryResponse, ChartRequest } from '@coding-challenge/api-model';
 
+const API_PATH = 'stock/chart';
+
 @Injectable()
 export class PriceQueryEffects {
   @Effect() loadPriceQuery$ = this.dataPersistence.fetch(
@@ -27,12 +29,11 @@ export class PriceQueryEffects {
           period: action.period
         };
         return this.httpClient
-          .post('stock/chart', request)
+          .post(API_PATH, request)
           .pipe(
             map(resp => new PriceQueryFetched(resp as PriceQueryResponse[]))
           );
       },
-
       onError: (action: FetchPriceQuery, error) => {
         return new PriceQueryFetchError(error);
       }
@@ -40,7 +41,6 @@ export class PriceQueryEffects {
   );
 
   constructor(
-    @Inject(StocksAppConfigToken) private env: StocksAppConfig,
     private httpClient: HttpClient,
     private dataPersistence: DataPersistence<PriceQueryPartialState>
   ) {}
