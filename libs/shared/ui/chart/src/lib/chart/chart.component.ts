@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
@@ -12,8 +11,7 @@ import { CHART_CONST } from './chart.constant';
 @Component({
   selector: 'coding-challenge-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit, OnDestroy {
   @Input() data$: Observable<any>;
