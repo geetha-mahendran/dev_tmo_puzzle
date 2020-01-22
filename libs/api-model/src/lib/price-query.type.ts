@@ -29,3 +29,10 @@ export type PriceQueryResponse = {
   label: string;
   changeOverTime: number;
 };
+
+export type DateRange = { viewValue: string; value: string; order: number };
+
+export interface ChartRequest {
+  symbol: string;
+  period: string;
+}

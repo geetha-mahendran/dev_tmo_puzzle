@@ -14,7 +14,7 @@ import {
   PriceQueryFetchError
 } from './price-query.actions';
 import { PriceQueryPartialState } from './price-query.reducer';
-import { PriceQueryResponse } from './price-query.type';
+import { PriceQueryResponse, ChartRequest } from '@coding-challenge/api-model';
 
 @Injectable()
 export class PriceQueryEffects {
@@ -22,12 +22,12 @@ export class PriceQueryEffects {
     PriceQueryActionTypes.FetchPriceQuery,
     {
       run: (action: FetchPriceQuery, state: PriceQueryPartialState) => {
+        const request: ChartRequest = {
+          symbol: action.symbol,
+          period: action.period
+        };
         return this.httpClient
-          .get(
-            `${this.env.apiURL}/beta/stock/${action.symbol}/chart/${
-              action.period
-            }?token=${this.env.apiKey}`
-          )
+          .post('stock/chart', request)
           .pipe(
             map(resp => new PriceQueryFetched(resp as PriceQueryResponse[]))
           );

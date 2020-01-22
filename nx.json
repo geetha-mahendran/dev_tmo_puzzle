@@ -9,33 +9,28 @@
   },
   "projects": {
     "stocks-data-access-price-query": {
-      "tags": [
-        "type:data-access",
-        "scope:stocks"
-      ]
+      "tags": ["type:data-access", "scope:stocks"]
     },
     "stocks": {
-      "tags": []
+      "tags": ["type:app", "build:stock", "platform:client", "scope:stocks"]
     },
     "stocks-e2e": {
-      "tags": []
+      "tags": ["type:app", "platform:client", "scope:stocks"]
     },
     "stocks-feature-shell": {
-      "tags": [
-        "scope:stocks",
-        "type:feature"
-      ]
+      "tags": ["scope:stocks", "type:feature"]
     },
     "shared-ui-chart": {
-      "tags": []
+      "tags": ["platform:client", "scope:shared", "type:ui"]
     },
     "stocks-data-access-app-config": {
-      "tags": []
+      "tags": ["platform:client", "scope:shared", "type:util"]
     },
     "stocks-api": {
-      "tags": [
-        "platform:server"
-      ]
+      "tags": ["platform:server", "scope:stocks", "type:util"]
+    },
+    "api-model": {
+      "tags": ["platform:server", "scope:shared", "type:util"]
     }
   }
 }

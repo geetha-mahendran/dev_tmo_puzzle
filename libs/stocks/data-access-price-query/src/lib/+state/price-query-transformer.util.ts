@@ -1,4 +1,4 @@
-import { PriceQueryResponse, PriceQuery } from './price-query.type';
+import { PriceQueryResponse, PriceQuery } from '@coding-challenge/api-model';
 import { map, pick } from 'lodash-es';
 import { parse } from 'date-fns';
 import moment from 'moment';
