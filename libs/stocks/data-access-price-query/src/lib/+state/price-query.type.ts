@@ -1,5 +1,5 @@
 export type PriceQuery = {
-  date: string;
+  date: Date;
   dateNumeric: number;
   open: number;
   high: number;
@@ -13,7 +13,7 @@ export type PriceQuery = {
 };
 
 export type PriceQueryResponse = {
-  date: string;
+  date: Date;
   open: number;
   close: number;
   high: number;

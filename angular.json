@@ -256,7 +256,8 @@
           "builder": "@nrwl/builders:jest",
           "options": {
             "jestConfig": "libs/stocks/data-access-app-config/jest.config.js",
-            "tsConfig": "libs/stocks/data-access-app-config/tsconfig.spec.json"
+            "tsConfig": "libs/stocks/data-access-app-config/tsconfig.spec.json",
+            "setupFile": "libs/stocks/data-access-app-config/src/test-setup.ts"
           }
         }
       },
