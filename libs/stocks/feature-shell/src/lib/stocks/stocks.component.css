@@ -6,7 +6,10 @@ mat-form-field {
   margin-bottom: 20px;
 }
 
-.hint-label{
-  margin-bottom: 20px;
-  color:gray;
+.symbolInput{
+  margin-bottom: 15px;
+}
+
+.calendar{
+  width: 200px;
 }

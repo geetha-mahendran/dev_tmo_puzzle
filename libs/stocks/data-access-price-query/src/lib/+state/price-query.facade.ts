@@ -3,8 +3,8 @@ import { select, Store } from '@ngrx/store';
 import { FetchPriceQuery } from './price-query.actions';
 import { PriceQueryPartialState } from './price-query.reducer';
 import { getSelectedSymbol, getAllPriceQueries } from './price-query.selectors';
-import { map, skip } from 'rxjs/operators';
-
+import { map } from 'rxjs/operators';
+import { DateRange } from './price-query.type';
 @Injectable()
 export class PriceQueryFacade {
   selectedSymbol$ = this.store.pipe(select(getSelectedSymbol));
@@ -16,8 +16,7 @@ export class PriceQueryFacade {
   );
 
   constructor(private store: Store<PriceQueryPartialState>) {}
-
-  fetchQuote(symbol: string, period: string) {
-    this.store.dispatch(new FetchPriceQuery(symbol, period));
+  fetchQuote(symbol: string, dateRange: DateRange) {
+    this.store.dispatch(new FetchPriceQuery(symbol, dateRange));
   }
 }

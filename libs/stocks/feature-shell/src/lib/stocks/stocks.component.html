@@ -1,5 +1,5 @@
 <form [formGroup]="stockPickerForm" class="tmo-sock-form">
-  <mat-form-field>
+  <mat-form-field class="symbolInput">
     <input
       matInput
       placeholder="Symbol e.g AAPL"
@@ -16,17 +16,38 @@
       >
     </mat-error>
   </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Favorite time period</mat-label>
-    <mat-select formControlName="period">
-      <mat-option
-        *ngFor="let timePeriod of timePeriods"
-        [value]="timePeriod.value"
-      >
-        {{ timePeriod.viewValue }}
-      </mat-option>
-    </mat-select>
+  <mat-form-field class="calendar">
+    <input
+      matInput
+      [matDatepicker]="startdtPicker"
+      id="startDate"
+      (dateChange)="OnChange($event)"
+      placeholder="From Date"
+      readonly
+      formControlName="startDate"
+      [max]="maxDate"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="startdtPicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #startdtPicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="calendar">
+    <input
+      matInput
+      [matDatepicker]="endDtPicker"
+      placeholder="To Date"
+      readonly
+      [min]='minEndDate'
+      formControlName="endDate"
+      [max]="maxDate"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="endDtPicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #endDtPicker></mat-datepicker>
   </mat-form-field>
 </form>
 

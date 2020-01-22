@@ -4,6 +4,7 @@ import { PriceQueryFacade } from '@coding-challenge/stocks/data-access-price-que
 import {STOCK_CONST, DropDownDateRange} from '../stock.constant';
 import { debounceTime,takeUntil } from 'rxjs/operators';
 import { Subject} from 'rxjs'
+import moment from 'moment';
 @Component({
   selector: 'coding-challenge-stocks',
   templateUrl: './stocks.component.html',
@@ -12,16 +13,23 @@ import { Subject} from 'rxjs'
 export class StocksComponent implements OnInit, OnDestroy {
   stockPickerForm: FormGroup;
   quotes$ = this.priceQuery.priceQueries$;
+  maxDate = moment().toDate();
+  minEndDate: Date = new Date();
   destroy: Subject<void> = new Subject<void>();
   timePeriods :Array<DropDownDateRange> =  STOCK_CONST.DateRange_Value.sort((a,b) => {
     return a.order - b.order;
   })
   constructor(private fb: FormBuilder, private priceQuery: PriceQueryFacade) {
     this.stockPickerForm = fb.group({
-      symbol: [null, Validators.required],
-      period: [null, Validators.required]
+      symbol: ['', Validators.required],
+      startDate: [
+        moment()
+          .subtract(1, 'years')
+          .toDate()
+      ],
+      endDate: [new Date()]
     });
-    this.stockPickerForm.get('period').setValue('1m');
+    this.minEndDate = this.stockPickerForm.value.startDate;
   }
 
   ngOnInit() {
@@ -34,12 +42,20 @@ export class StocksComponent implements OnInit, OnDestroy {
 
   fetchQuote(value) {
     if (this.stockPickerForm.valid) {
-      const { symbol, period } = value
-      this.priceQuery.fetchQuote(symbol, period);
+      const { symbol, startDate, endDate } = value;
+      this.priceQuery.fetchQuote(symbol, {
+        startDate: startDate,
+        endDate: endDate
+      });
     }
   }
-
-  ngOnDestroy(){
+  OnChange(event: any) {
+    if (event.value > this.stockPickerForm.value.endDate) {
+      this.stockPickerForm.controls['endDate'].setValue(event.value);
+    }
+    this.minEndDate = this.stockPickerForm.value.startDate;
+  }
+  ngOnDestroy() {
     this.destroy.next();
     this.destroy.complete();
   }

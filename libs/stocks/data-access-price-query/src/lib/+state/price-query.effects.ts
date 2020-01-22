@@ -15,7 +15,7 @@ import {
 } from './price-query.actions';
 import { PriceQueryPartialState } from './price-query.reducer';
 import { PriceQueryResponse } from './price-query.type';
-
+import moment from 'moment';
 @Injectable()
 export class PriceQueryEffects {
   @Effect() loadPriceQuery$ = this.dataPersistence.fetch(
@@ -25,14 +25,27 @@ export class PriceQueryEffects {
         return this.httpClient
           .get(
             `${this.env.apiURL}/beta/stock/${action.symbol}/chart/${
-              action.period
+              this.env.period
             }?token=${this.env.apiKey}`
           )
           .pipe(
-            map(resp => new PriceQueryFetched(resp as PriceQueryResponse[]))
+            map(resp => {
+              if (action.dateRange) {
+                return new PriceQueryFetched(
+                  (resp as PriceQueryResponse[]).filter(
+                    value =>
+                      moment(value.date, STOCK_CONSTANT.API_DATE_FORMAT).toDate() >=
+                        action.dateRange.startDate &&
+                      moment(value.date, STOCK_CONSTANT.API_DATE_FORMAT).toDate() <=
+                        action.dateRange.endDate
+                  )
+                );
+              } else {
+                return new PriceQueryFetched(resp as PriceQueryResponse[]);
+              }
+            })
           );
       },
-
       onError: (action: FetchPriceQuery, error) => {
         return new PriceQueryFetchError(error);
       }
@@ -45,3 +58,7 @@ export class PriceQueryEffects {
     private dataPersistence: DataPersistence<PriceQueryPartialState>
   ) {}
 }
+
+export const STOCK_CONSTANT: any = {
+  API_DATE_FORMAT : 'YYYY-MM-DD'
+};
