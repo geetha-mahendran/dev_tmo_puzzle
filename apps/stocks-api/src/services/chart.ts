@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { environment } from '../environments/environment';
 import { APP_CONSTANT } from '../app/app.constant';
-import { ChartRequest, PriceQueryResponse } from '@coding-challenge/api-model';
+import { ChartRequest } from '@coding-challenge/api-model';
 export const chartPlugin = {
   name: APP_CONSTANT.STOCKS_PLUGIN_NAME,
   register: async (server) => {
