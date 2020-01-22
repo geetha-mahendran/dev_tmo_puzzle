@@ -15,7 +15,7 @@ import { CHART_CONST } from './chart.constant';
   styleUrls: ['./chart.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChartComponent implements OnInit, OnDestroy {
+export class ChartComponent implements OnInit {
   @Input() data$: Observable<any>;
   chartData: any;
   chart: any;
@@ -41,13 +41,5 @@ export class ChartComponent implements OnInit, OnDestroy {
         }
       }
     };
-    this.data$.pipe(takeUntil(this.destroy)).subscribe(newData => {
-      this.chartData = newData;
-    });
-  }
-
-  ngOnDestroy() {
-    this.destroy.next();
-    this.destroy.complete();
   }
 }

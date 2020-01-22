@@ -28,9 +28,4 @@ describe('ChartComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should unsubscribe on ngOnDestroy', () => {
-    const spy = jest.spyOn(component.destroy, 'complete');
-    component.ngOnDestroy();
-    expect(spy).toHaveBeenCalled();
-  });
 });

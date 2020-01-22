@@ -65,7 +65,13 @@ describe('StocksComponent', () => {
   });
 
   it('should call fetchQuote service', () => {
-    component.fetchQuote();
+    //component.fetchQuote();
     assert.isTrue(component.stockPickerForm.valid);
+  });
+
+  it('should unsubscribe on ngOnDestroy', () => {
+    const spy = jest.spyOn(component.destroy, 'complete');
+    component.ngOnDestroy();
+    expect(component.destroy.complete).toHaveBeenCalled();
   });
 });
